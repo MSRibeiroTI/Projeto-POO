@@ -30,9 +30,9 @@ public class AddParts extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField_name;
+	private JTextField textField_Amount;
+	private JTextField textField_Price;
 
 	/**
 	 * Launch the application.
@@ -72,51 +72,50 @@ public class AddParts extends JFrame {
 		lblNewLabel_1.setBounds(33, 80, 130, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(33, 95, 452, 31);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_name = new JTextField();
+		textField_name.setBounds(33, 95, 452, 31);
+		contentPane.add(textField_name);
+		textField_name.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Quantidade");
 		lblNewLabel_2.setBounds(33, 136, 130, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setBounds(33, 151, 96, 31);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_Amount = new JTextField();
+		textField_Amount.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_Amount.setBounds(33, 151, 96, 31);
+		contentPane.add(textField_Amount);
+		textField_Amount.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Descrição");
 		lblNewLabel_3.setBounds(33, 192, 96, 13);
 		contentPane.add(lblNewLabel_3);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(33, 208, 452, 163);
-		contentPane.add(editorPane);
+		JEditorPane editorPane_Description = new JEditorPane();
+		editorPane_Description.setBounds(33, 208, 452, 163);
+		contentPane.add(editorPane_Description);
 		
 		JLabel lblNewLabel_4 = new JLabel("Preço");
 		lblNewLabel_4.setBounds(224, 136, 45, 13);
 		contentPane.add(lblNewLabel_4);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Aachen BT", Font.BOLD, 17));
-		textField_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_2.setBounds(223, 151, 262, 31);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textField_Price = new JTextField();
+		textField_Price.setFont(new Font("Aachen BT", Font.BOLD, 17));
+		textField_Price.setHorizontalAlignment(SwingConstants.RIGHT);
+		textField_Price.setBounds(223, 151, 262, 31);
+		contentPane.add(textField_Price);
+		textField_Price.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Salvar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("") || textField_1.getText().equals("") || editorPane.getText().equals("")) {
+				if(textField_name.getText().equals("") || textField_Amount.getText().equals("") || editorPane_Description.getText().equals("")) {
 					
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de salvar.");
 				}else {
 				
-				Parts.addParts(textField.getText(), editorPane.getText(), textField_1.getText(), textField_2.getText());
+				Parts.addParts(textField_name.getText(), editorPane_Description.getText(), textField_Amount.getText(), textField_Price.getText());
 				dispose();
-			
 			}}
 		});
 		btnNewButton.setBounds(33, 381, 113, 36);
