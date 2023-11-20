@@ -21,8 +21,6 @@ public class UserClass {
 		try {
 		String add = "UPDATE usuario SET nome = ?, pass = ?, cargo = ? WHERE ID = "+ID+";";
 		
-		System.out.println(name+ " "+pass+" "+cargo+" "+ID);
-
 		Connection conexao = ConnectDataBase.conect();
 		PreparedStatement ps = conexao.prepareStatement(add);
 		ps.setString(1, name.toUpperCase());
@@ -68,6 +66,9 @@ public class UserClass {
 			} catch (Exception e) {
 				System.out.println(e);				
 			}
+	}
+	public static void deleteUser() {
+		
 	}
 
 	public static Object getName() {

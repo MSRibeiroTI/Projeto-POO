@@ -20,10 +20,13 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JDesktopPane;
 import java.awt.Point;
+import javax.swing.JFormattedTextField;
 
 public class ClientView extends JFrame {
 
@@ -67,6 +70,7 @@ public class ClientView extends JFrame {
 		contentPane.add(scrollPane);
 		
 		ClientsTb = new JTable();
+		ClientsTb.setCellSelectionEnabled(true);
 		ClientsTb.setAutoCreateRowSorter(true);
 		ClientsTb.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -83,14 +87,15 @@ public class ClientView extends JFrame {
 		ClientsTb.getColumnModel().getColumn(6).setPreferredWidth(101);
 		scrollPane.setViewportView(ClientsTb);
 		
-		JButton btnNewButton = new JButton("Sair");
-		btnNewButton.setBounds(750, 384, 173, 50);
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		JButton btnNewButtonExit = new JButton("Sair");
+		btnNewButtonExit.setBounds(750, 384, 173, 50);
+		btnNewButtonExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		contentPane.add(btnNewButton);
+		contentPane.add(btnNewButtonExit);
 		
 		JLabel lblNewLabel = new JLabel("CLIENTES CADASTRADOS");
 		lblNewLabel.setBounds(10, 10, 913, 34);
@@ -98,34 +103,34 @@ public class ClientView extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton_1 = new JButton("Listar Todos");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_Listar = new JButton("Listar Todos");
+		btnNewButton_Listar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				casaDePeças.consult();
 			}
 		});
-		btnNewButton_1.setBounds(201, 384, 173, 50);
-		contentPane.add(btnNewButton_1);
+		btnNewButton_Listar.setBounds(201, 384, 173, 50);
+		contentPane.add(btnNewButton_Listar);
 
 
-		btnNewButton_1 = new JButton("Cadastrar Novo Cliente");
-		btnNewButton_1.setBounds(10, 384, 181, 50);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnNewButton_Listar = new JButton("Cadastrar Novo Cliente");
+		btnNewButton_Listar.setBounds(10, 384, 181, 50);
+		btnNewButton_Listar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
 				
 				casaDePeças.validCPF();
 			}
 		});
-		contentPane.add(btnNewButton_1);
+		contentPane.add(btnNewButton_Listar);
 		
 		textFieldbusca = new JTextField();
 		textFieldbusca.setBounds(10, 68, 467, 29);
 		contentPane.add(textFieldbusca);
 		textFieldbusca.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("Buscar");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnNewButton_Buscar = new JButton("Buscar");
+		btnNewButton_Buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textFieldbusca.getText().equals("")) {
 					
@@ -135,8 +140,8 @@ public class ClientView extends JFrame {
 				casaDePeças.search(textFieldbusca.getText());
 			}}
 		});
-		btnNewButton_2.setBounds(487, 68, 122, 29);
-		contentPane.add(btnNewButton_2);
+		btnNewButton_Buscar.setBounds(487, 68, 122, 29);
+		contentPane.add(btnNewButton_Buscar);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nome do Cliente");
 		lblNewLabel_1.setBounds(10, 54, 166, 13);
@@ -147,15 +152,20 @@ public class ClientView extends JFrame {
 		lblNewLabel_2.setBounds(760, 444, 163, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		JButton btnNewButton_3 = new JButton("Deletar");
-		btnNewButton_3.setBounds(567, 384, 173, 50);
-		contentPane.add(btnNewButton_3);
+		JButton btnNewButton_Delete = new JButton("Deletar");
+		btnNewButton_Delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnNewButton_Delete.setBounds(567, 384, 173, 50);
+		contentPane.add(btnNewButton_Delete);
 		
 		JButton btnNewButton_4 = new JButton("Atualizar");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String IDUpdate = JOptionPane.showInputDialog("Qual o ID do cliente?");
-				Client.UpdateClient(IDUpdate);
+				Client.consultClient(IDUpdate);
 			}
 		});
 		btnNewButton_4.setBounds(384, 384, 173, 50);

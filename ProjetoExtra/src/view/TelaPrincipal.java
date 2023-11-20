@@ -96,6 +96,12 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(btnNewButton_3);
 		
 		btnNewButton_4 = new JButton("Realizar Venda");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new view.sales().setVisible(true);
+			}
+		});
 		btnNewButton_4.setBounds(130, 113, 226, 61);
 		contentPane.add(btnNewButton_4);
 		

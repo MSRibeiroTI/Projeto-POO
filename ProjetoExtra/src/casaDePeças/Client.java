@@ -8,6 +8,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.protocol.a.authentication.Sha256PasswordPlugin;
+
 public class Client extends Base{
 	
 	private String cpf;
@@ -30,7 +32,7 @@ public class Client extends Base{
 		this.email = email;
 	}
 	
-	public static void UpdateClient(String id) {
+	public static void consultClient(String id) {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
@@ -63,7 +65,7 @@ public class Client extends Base{
 			}
 	}
 	
-	public static void updateClient1(String name, String CPF, String address, String city, String phone, String email) {
+	public static void updateClient(String name, String CPF, String address, String city, String phone, String email) {
 		try {
 		String add = "UPDATE cliente SET Nname = ?, CPF = ?, Address = ?, City = ?, Phone = ?, Email = ? WHERE CPF = "+CPF+";";
 		
@@ -83,6 +85,9 @@ public class Client extends Base{
 		}catch(Exception e) {
 			System.out.println(e);
 		}
+	}
+	public static void deleteClient() {
+		
 	}
 		
 	

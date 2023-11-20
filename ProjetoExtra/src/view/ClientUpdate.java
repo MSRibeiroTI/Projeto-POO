@@ -23,11 +23,11 @@ public class ClientUpdate extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textField_Name;
+	private JTextField textField_Address;
+	private JTextField textField_City;
+	private JTextField textField_Phone;
+	private JTextField textField_Email;
 
 	/**
 	 * Launch the application.
@@ -63,19 +63,19 @@ public class ClientUpdate extends JFrame {
 		lblNewLabel.setBounds(25, 63, 45, 13);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField((String) Client.getName1());
-		textField.setBounds(25, 76, 497, 30);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_Name = new JTextField((String) Client.getName1());
+		textField_Name.setBounds(25, 76, 497, 30);
+		contentPane.add(textField_Name);
+		textField_Name.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Endereço");
 		lblNewLabel_1.setBounds(25, 116, 85, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField((String) Client.getAddress1());
-		textField_1.setBounds(25, 131, 497, 30);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_Address = new JTextField((String) Client.getAddress1());
+		textField_Address.setBounds(25, 131, 497, 30);
+		contentPane.add(textField_Address);
+		textField_Address.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cidade");
 		lblNewLabel_2.setBounds(25, 171, 45, 13);
@@ -85,20 +85,20 @@ public class ClientUpdate extends JFrame {
 		lblNewLabel_3.setBounds(277, 171, 85, 13);
 		contentPane.add(lblNewLabel_3);
 		
-		textField_2 = new JTextField((String) Client.getCidade());
-		textField_2.setBounds(25, 183, 225, 30);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textField_City = new JTextField((String) Client.getCidade());
+		textField_City.setBounds(25, 183, 225, 30);
+		contentPane.add(textField_City);
+		textField_City.setColumns(10);
 		
-		textField_3 = new JTextField((String) Client.getPhone1());
-		textField_3.setBounds(277, 183, 245, 30);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		textField_Phone = new JTextField((String) Client.getPhone1());
+		textField_Phone.setBounds(277, 183, 245, 30);
+		contentPane.add(textField_Phone);
+		textField_Phone.setColumns(10);
 		
-		textField_4 = new JTextField((String) Client.getEmail1());
-		textField_4.setBounds(25, 235, 497, 30);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		textField_Email = new JTextField((String) Client.getEmail1());
+		textField_Email.setBounds(25, 235, 497, 30);
+		contentPane.add(textField_Email);
+		textField_Email.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel((String) Client.getcPF1());
 		lblNewLabel_6.setBounds(25, 282, 192, 28);
@@ -109,13 +109,13 @@ public class ClientUpdate extends JFrame {
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("")) {
+				if(textField_Name.getText().equals("") || textField_Address.getText().equals("") || textField_City.getText().equals("")) {
 					
 					JOptionPane.showMessageDialog(null, "Informações incompletas!");;
 					
 				}else {
 				
-				Client.updateClient1(textField.getText(), lblNewLabel_6.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());		
+				Client.updateClient(textField_Name.getText(), lblNewLabel_6.getText(), textField_Address.getText(), textField_City.getText(), textField_Phone.getText(), textField_Email.getText());		
 				ClientUpdate.this.dispose();		}
 		}});
 			
