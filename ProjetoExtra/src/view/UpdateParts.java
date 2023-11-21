@@ -34,30 +34,11 @@ public class UpdateParts extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField_pName;
+	private JTextField textField_amount;
+	private JTextField textField_price;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UpdateParts frame = new UpdateParts();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 * @throws IOException 
-	 */
 	public UpdateParts() throws IOException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 525, 487);
@@ -77,29 +58,29 @@ public class UpdateParts extends JFrame {
 		lblNewLabel_1.setBounds(33, 80, 130, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField((String)Parts.getName1());
-		textField.setBounds(33, 95, 452, 31);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_pName = new JTextField((String)Parts.getName1());
+		textField_pName.setBounds(33, 95, 452, 31);
+		contentPane.add(textField_pName);
+		textField_pName.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Quantidade");
 		lblNewLabel_2.setBounds(33, 136, 130, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		textField_1 = new JTextField((String)Parts.getQuant());
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setBounds(33, 151, 96, 31);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_amount = new JTextField((String)Parts.getQuant());
+		textField_amount.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_amount.setBounds(33, 151, 96, 31);
+		contentPane.add(textField_amount);
+		textField_amount.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Descrição");
-		lblNewLabel_3.setBounds(33, 192, 96, 13);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblNewLabel_description = new JLabel("Descrição");
+		lblNewLabel_description.setBounds(33, 192, 96, 13);
+		contentPane.add(lblNewLabel_description);
 		
-		JTextArea textArea = new JTextArea((String)Parts.getDescription1());
-		textArea.setLineWrap(true);
-		textArea.setBounds(33, 221, 452, 150);
-		contentPane.add(textArea);
+		JTextArea textArea_description = new JTextArea((String)Parts.getDescription1());
+		textArea_description.setLineWrap(true);
+		textArea_description.setBounds(33, 221, 452, 150);
+		contentPane.add(textArea_description);
 		
 		JLabel lblNewLabel_5 = new JLabel((String)Parts.getID());
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -110,21 +91,21 @@ public class UpdateParts extends JFrame {
 		lblNewLabel_6.setBounds(299, 136, 45, 13);
 		contentPane.add(lblNewLabel_6);
 		
-		textField_2 = new JTextField((String)Parts.getPrice());
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 17));
-		textField_2.setBounds(299, 151, 186, 31);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textField_price = new JTextField((String)Parts.getPrice());
+		textField_price.setFont(new Font("Tahoma", Font.BOLD, 17));
+		textField_price.setBounds(299, 151, 186, 31);
+		contentPane.add(textField_price);
+		textField_price.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Salvar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("") || textField_1.getText().equals("") || textArea.getText().equals("")) {
+				if(textField_pName.getText().equals("") || textField_amount.getText().equals("") || textArea_description.getText().equals("")) {
 					
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de salvar.");
 				}else {
 				
-				Parts.updateParts1(lblNewLabel_5.getText(), textField.getText(), textArea.getText(), textField_1.getText(), textField_2.getText());
+				Parts.updateParts1(lblNewLabel_5.getText(), textField_pName.getText(), textArea_description.getText(), textField_amount.getText(), textField_price.getText());
 				dispose();
 			
 			}}
@@ -132,14 +113,14 @@ public class UpdateParts extends JFrame {
 		btnNewButton.setBounds(33, 381, 113, 36);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_cancel = new JButton("Cancelar");
+		btnNewButton_cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(156, 381, 113, 36);
-		contentPane.add(btnNewButton_1);
+		btnNewButton_cancel.setBounds(156, 381, 113, 36);
+		contentPane.add(btnNewButton_cancel);
 		
 		JLabel lblNewLabel_4 = new JLabel("Nº ID:");
 		lblNewLabel_4.setBounds(156, 136, 102, 13);

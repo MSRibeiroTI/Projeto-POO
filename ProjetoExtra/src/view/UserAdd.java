@@ -22,29 +22,11 @@ public class UserAdd extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textField_userName;
+	private JTextField textField_function;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UserAdd frame = new UserAdd();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public UserAdd() {
 		setTitle("Gerenciador Comercial");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -65,19 +47,19 @@ public class UserAdd extends JFrame {
 		lblNewLabel_1.setBounds(97, 62, 174, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(97, 74, 338, 31);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_userName = new JTextField();
+		textField_userName.setBounds(97, 74, 338, 31);
+		contentPane.add(textField_userName);
+		textField_userName.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cargo");
 		lblNewLabel_2.setBounds(97, 115, 70, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(97, 127, 338, 31);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_function = new JTextField();
+		textField_function.setBounds(97, 127, 338, 31);
+		contentPane.add(textField_function);
+		textField_function.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Senha");
 		lblNewLabel_3.setBounds(97, 168, 45, 13);
@@ -89,14 +71,15 @@ public class UserAdd extends JFrame {
 		
 		JButton btnNewButton = new JButton("Salvar");
 		btnNewButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("") || textField_1.getText().equals("") || passwordField.getText().equals("")) {
+				if(textField_userName.getText().equals("") || textField_function.getText().equals("") || passwordField.getText().equals("")) {
 					
 					JOptionPane.showMessageDialog(null, "Informações incompletas!");;
 					
 				}else {
 				
-				casaDePeças.addAdmin(textField.getText(), textField_1.getText(), passwordField.getText());		
+				casaDePeças.addAdmin(textField_userName.getText(), textField_function.getText(), passwordField.getText());		
 				UserAdd.this.dispose();
 			}
 		}});

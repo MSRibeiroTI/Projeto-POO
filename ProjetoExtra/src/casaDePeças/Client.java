@@ -24,8 +24,8 @@ public class Client extends Base{
 	private static Object phone1;
 	private static Object email1;
 		
-	public Client(String Name, String address, String city, String phone, String email) {
-		super(Name);
+	public Client(String Name, int id, String address, String city, String phone, String email) {
+		super(Name, id);
 		this.address = address;
 		this.city = city;
 		this.phone = phone;

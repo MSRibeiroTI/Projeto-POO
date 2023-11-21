@@ -31,25 +31,7 @@ public class PartsView extends JFrame {
 	public static JTable PartsTb;
 	private JTextField textFieldbusca;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					PartsView frame = new PartsView();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public PartsView() {
 		setTitle("Gerenciador Comercial");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -99,34 +81,34 @@ public class PartsView extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton_1 = new JButton("Listar Todos");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_listAll = new JButton("Listar Todos");
+		btnNewButton_listAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Parts.consultParts();
 			}
 		});
-		btnNewButton_1.setBounds(201, 384, 173, 50);
-		contentPane.add(btnNewButton_1);
+		btnNewButton_listAll.setBounds(201, 384, 173, 50);
+		contentPane.add(btnNewButton_listAll);
 
 
-		btnNewButton_1 = new JButton("Cadastrar Novo Produto");
-		btnNewButton_1.setBounds(10, 384, 181, 50);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_addProduct = new JButton("Cadastrar Novo Produto");
+		btnNewButton_addProduct.setBounds(10, 384, 181, 50);
+		btnNewButton_addProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
 				
 				new view.AddParts().setVisible(true);
 			}
 		});
-		contentPane.add(btnNewButton_1);
+		contentPane.add(btnNewButton_addProduct);
 		
 		textFieldbusca = new JTextField();
 		textFieldbusca.setBounds(10, 68, 467, 29);
 		contentPane.add(textFieldbusca);
 		textFieldbusca.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("Buscar");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnNewButton_search = new JButton("Buscar");
+		btnNewButton_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textFieldbusca.getText().equals("")) {
 					
@@ -136,8 +118,8 @@ public class PartsView extends JFrame {
 				casaDePeças.searchParts(textFieldbusca.getText());
 			}}
 		});
-		btnNewButton_2.setBounds(487, 68, 122, 29);
-		contentPane.add(btnNewButton_2);
+		btnNewButton_search.setBounds(487, 68, 122, 29);
+		contentPane.add(btnNewButton_search);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nome do Produto");
 		lblNewLabel_1.setBounds(10, 54, 166, 13);
@@ -148,26 +130,26 @@ public class PartsView extends JFrame {
 		lblNewLabel_2.setBounds(760, 444, 163, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		JButton btnNewButton_3 = new JButton("Deletar");
-		btnNewButton_3.setBounds(567, 384, 173, 50);
-		contentPane.add(btnNewButton_3);
+		JButton btnNewButton_delete = new JButton("Deletar");
+		btnNewButton_delete.setBounds(567, 384, 173, 50);
+		contentPane.add(btnNewButton_delete);
 		
-		JButton btnNewButton_4 = new JButton("Atualizar");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btnNewButton_update = new JButton("Atualizar");
+		btnNewButton_update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String IDUpdate = JOptionPane.showInputDialog("Qual o ID do Produto?");
 				Parts.updateParts(IDUpdate);
 			}
 		});
-		btnNewButton_4.setBounds(384, 384, 173, 50);
-		contentPane.add(btnNewButton_4);
+		btnNewButton_update.setBounds(384, 384, 173, 50);
+		contentPane.add(btnNewButton_update);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
+		JLabel lblNewLabel_img = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/produtos.png")).getImage();
-		lblNewLabel_3.setIcon(new ImageIcon(img));
-		lblNewLabel_3.setBounds(680, 10, 122, 87);
-		contentPane.add(lblNewLabel_3);
+		lblNewLabel_img.setIcon(new ImageIcon(img));
+		lblNewLabel_img.setBounds(680, 10, 122, 87);
+		contentPane.add(lblNewLabel_img);
 	
 	}
 }

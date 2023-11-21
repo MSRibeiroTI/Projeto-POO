@@ -6,10 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import casaDePeças.LogGenerator;
 import casaDePeças.casaDePeças;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -28,32 +33,13 @@ public class TelaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel lblNewLabel_1;
-	private JButton btnNewButton_4;
-	private JButton btnNewButton_5;
-	private JButton btnNewButton_6;
-	private JButton btnNewButton_7;
+	private JLabel lblNewLabel_title;
+	private JButton btnNewButton_sale;
+	private JButton btnNewButton_report;
+	private JButton btnNewButton_users;
+	private JButton btnNewButton_about;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaPrincipal frame = new TelaPrincipal();
-//					frame.setLocationRelativeTo(null);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public TelaPrincipal() {
 		setTitle("Gerenciador Comercial");
 		setResizable(false);
@@ -76,11 +62,11 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(btnNewButton);
 		
-		lblNewLabel_1 = new JLabel("GERENCIADOR DE VENDAS");
-		lblNewLabel_1.setBounds(10, 12, 692, 31);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Aachen BT", Font.BOLD, 25));
-		contentPane.add(lblNewLabel_1);
+		lblNewLabel_title = new JLabel("GERENCIADOR DE VENDAS");
+		lblNewLabel_title.setBounds(10, 12, 692, 31);
+		lblNewLabel_title.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_title.setFont(new Font("Aachen BT", Font.BOLD, 25));
+		contentPane.add(lblNewLabel_title);
 		
 		JButton btnNewButton_2 = new JButton("Cadastro de Produtos");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -95,49 +81,54 @@ public class TelaPrincipal extends JFrame {
 		btnNewButton_3.setBounds(368, 184, 226, 38);
 		contentPane.add(btnNewButton_3);
 		
-		btnNewButton_4 = new JButton("Realizar Venda");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		btnNewButton_sale = new JButton("Realizar Venda");
+		btnNewButton_sale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				new view.sales().setVisible(true);
 			}
 		});
-		btnNewButton_4.setBounds(130, 113, 226, 61);
-		contentPane.add(btnNewButton_4);
+		btnNewButton_sale.setBounds(130, 113, 226, 61);
+		contentPane.add(btnNewButton_sale);
 		
 		JLabel lblNewLabel_2 = new JLabel("Marcelo Ribeiro 2ºP ADS");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_2.setBounds(541, 344, 163, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		btnNewButton_5 = new JButton("Vendas Realizadas");
-		btnNewButton_5.setBounds(368, 113, 226, 61);
-		contentPane.add(btnNewButton_5);
+		btnNewButton_report = new JButton("Vendas Realizadas");
+		btnNewButton_report.setBounds(368, 113, 226, 61);
+		contentPane.add(btnNewButton_report);
 		
-		btnNewButton_6 = new JButton("Usuários");
-		btnNewButton_6.addActionListener(new ActionListener() {
+		btnNewButton_users = new JButton("Usuários");
+		btnNewButton_users.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				new view.User().setVisible(true);
 			}
 		});
-		btnNewButton_6.setBounds(130, 285, 226, 38);
-		contentPane.add(btnNewButton_6);
+		btnNewButton_users.setBounds(130, 285, 226, 38);
+		contentPane.add(btnNewButton_users);
 		
-		btnNewButton_7 = new JButton("Sobre");
-		btnNewButton_7.addActionListener(new ActionListener() {
+		btnNewButton_about = new JButton("Sobre");
+		btnNewButton_about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Programa desenvolvido em JAVA. \nFerramentas utilizadas: IDE Eclipse com WindowBuilder, MySql WorkBench \n"
 						+ "Disciplina: Linguagem de Programação Orientada a Objetos\nProfessor: Talles Campos Pacheco\nAluno: Marcelo Ribeiro\n2º Período Análise e Desenvolvimento de Ssistemas.");
 			}
 		});
-		btnNewButton_7.setBounds(368, 234, 226, 38);
-		contentPane.add(btnNewButton_7);
+		btnNewButton_about.setBounds(368, 234, 226, 38);
+		contentPane.add(btnNewButton_about);
 		
 		JButton btnNewButton_1 = new JButton("Sair");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				try {
+					LogGenerator.generateLog("Saiu do Sistema "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setBounds(368, 285, 226, 38);

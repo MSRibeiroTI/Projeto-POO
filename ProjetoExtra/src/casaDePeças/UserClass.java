@@ -1,23 +1,36 @@
 package casaDePeças;
 
+import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class UserClass {
+public class UserClass extends Base {
+	private String password;
+	private String function;
 	
-	private static Object Name;
+	public UserClass(String Name, int id, String function, String password) {
+		super(Name, id);
+		this.function = function;
+		this.password = password;
+		
+	}
+
+	private static Object Name1;
 	private static Object Pass;
 	private static Object Cargo;
 	private static Object ID1;
 	
 	
-	public static void UpdateUser(String name, String pass, String cargo, String ID) {
+	public static void UpdateUser(String name, String pass, String cargo, String ID) throws IOException {
 		try {
 		String add = "UPDATE usuario SET nome = ?, pass = ?, cargo = ? WHERE ID = "+ID+";";
 		
@@ -29,13 +42,15 @@ public class UserClass {
 		ps.executeUpdate();
 		
 		JOptionPane.showMessageDialog(null, "Dados Atualizados com Sucesso!");
+		LogGenerator.generateLog("Alteração de Usuário ID: "+ID+" "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 		ps.close();
 		}catch(Exception e) {
 			System.out.println(e);
+			LogGenerator.generateLog("ERRO: "+e+" "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 		}
 	}
 	
-	public static void UserSerch(String id) {
+	public static void UserSerch(String id) throws IOException {
 		
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
@@ -55,6 +70,8 @@ public class UserClass {
 					setPass((modelo.getDataVector().elementAt(0).elementAt(1)));
 					setID1(modelo.getDataVector().elementAt(0).elementAt(3));
 					
+					LogGenerator.generateLog("Consulta Usuário ID: "+id+" "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+					
 					} catch (Exception e) {
 					System.out.println(e);
 				}
@@ -64,19 +81,35 @@ public class UserClass {
 				}
 				r.close();
 			} catch (Exception e) {
-				System.out.println(e);				
+				System.out.println(e);
+				LogGenerator.generateLog("ERRO: "+e+" "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			}
 	}
-	public static void deleteUser() {
-		
-	}
+	public static void deleteUser(String id) throws IOException {
+		try {
+			String del = "DELETE FROM usuario WHERE ID = '"+id+"'";
 
-	public static Object getName() {
-		return Name;
+			Connection conexao = ConnectDataBase.conect();
+			PreparedStatement ps = conexao.prepareStatement(del);
+			ps.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Dados Deletados com Sucesso!");
+			LogGenerator.generateLog("Usuário Deletado ID: "+id  +LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+			ps.close();
+			}catch(Exception e) {
+				System.out.println(e);
+				LogGenerator.generateLog("ERRO: "+e+" "+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+			}
+		}
+		
+	
+
+	public static Object getName1() {
+		return Name1;
 	}
 
 	public static void setName(Object name) {
-		Name = name;
+		Name1 = name;
 	}
 
 	public static Object getPass() {
@@ -100,5 +133,20 @@ public class UserClass {
 
 	public static void setID1(Object id) {
 		ID1 = id;
+}
 
-}}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}}

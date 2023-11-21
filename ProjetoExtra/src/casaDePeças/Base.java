@@ -5,9 +5,10 @@ public class Base {
 	private int id;
 	private String name;
 	
-	public Base(String Name) {
+	public Base(String Name, int id) {
+		this.id = id;
 		this.name = Name;
-	}
+			}
 
 	public int getId() {
 		return id;

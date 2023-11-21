@@ -13,16 +13,19 @@ public class Parts extends Base{
 	
 	private String description;
 	private int amount;
+	private double price1;
 	private static Object ID;
 	private static Object name1;
 	private static Object description1;
 	private static Object quant;
 	private static Object price;
 	
-	public Parts(String Name, String description, int amount) {
-		super(Name);
+	public Parts(String Name, int id, String description, int amount, double price) {
+		super(Name, id);
 		this.description = description;
 		this.amount = amount;
+		this.price1=price;
+		
 	}
 
 
@@ -158,6 +161,12 @@ public class Parts extends Base{
 	}
 	public static Object getID() {
 		return ID;
+	}
+	public double getPrice1() {
+		return price1;
+	}
+	public void setPrice1(double price1) {
+		this.price1 = price1;
 	}
 
 }

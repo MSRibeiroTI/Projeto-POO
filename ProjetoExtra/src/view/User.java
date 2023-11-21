@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import casaDePeças.Client;
+import casaDePeças.LogGenerator;
 import casaDePeças.UserClass;
 import casaDePeças.casaDePeças;
 
@@ -21,6 +22,10 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.awt.event.ActionEvent;
 
 public class User extends JFrame {
@@ -30,25 +35,7 @@ public class User extends JFrame {
 	public static JTable userTable;
 	private final JLabel lblNewLabel_2 = new JLabel("Marcelo Ribeiro 2ºP ADS");
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					User frame = new User();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public User() {
 		setTitle("Gerenciador Comercial");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,53 +73,73 @@ public class User extends JFrame {
 			
 		}});
 		
-		JButton btnNewButton_1 = new JButton("Cadastrar");
-		btnNewButton_1.setBounds(582, 138, 221, 38);
-		contentPane.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_add = new JButton("Cadastrar");
+		btnNewButton_add.setBounds(582, 138, 221, 38);
+		contentPane.add(btnNewButton_add);
+		btnNewButton_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new view.UserAdd().setVisible(true);
 			
 		}});
 		
-		JButton btnNewButton_2 = new JButton("Atualizar Senha");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnNewButton_updPass = new JButton("Atualizar Senha");
+		btnNewButton_updPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String IDUpdate = JOptionPane.showInputDialog("Qual o ID do Usuário?");
-				UserClass.UserSerch(IDUpdate);
+				try {
+					UserClass.UserSerch(IDUpdate);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});
-		btnNewButton_2.setBounds(582, 186, 221, 38);
-		contentPane.add(btnNewButton_2);
+		btnNewButton_updPass.setBounds(582, 186, 221, 38);
+		contentPane.add(btnNewButton_updPass);
 		
-		JButton btnNewButton_3 = new JButton("Deletar");
-		btnNewButton_3.setBounds(582, 234, 221, 38);
-		contentPane.add(btnNewButton_3);
-		
-		JLabel lblNewLabel = new JLabel("Administração dos Usuários do Sistema");
-		lblNewLabel.setFont(new Font("Aachen BT", Font.BOLD, 25));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 10, 793, 29);
-		contentPane.add(lblNewLabel);
-		
-		JButton btnNewButton_4 = new JButton("Sair");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btnNewButton_delete = new JButton("Deletar");
+		btnNewButton_delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+			
+				String ID = JOptionPane.showInputDialog("Qual a ID do usuário a ser deletado?");
+				try {
+					UserClass.deleteUser(ID);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
-		btnNewButton_4.setBounds(582, 282, 221, 38);
-		contentPane.add(btnNewButton_4);
+		btnNewButton_delete.setBounds(582, 234, 221, 38);
+		contentPane.add(btnNewButton_delete);
+		
+		JLabel lblNewLabel_title = new JLabel("Administração dos Usuários do Sistema");
+		lblNewLabel_title.setFont(new Font("Aachen BT", Font.BOLD, 25));
+		lblNewLabel_title.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_title.setBounds(10, 10, 793, 29);
+		contentPane.add(lblNewLabel_title);
+		
+		JButton btnNewButton_exit = new JButton("Sair");
+		btnNewButton_exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				try {
+					LogGenerator.generateLog("Saiu do cadastro de usuário"+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_exit.setBounds(582, 282, 221, 38);
+		contentPane.add(btnNewButton_exit);
 		lblNewLabel_2.setBounds(515, 310, 288, 36);
 		contentPane.add(lblNewLabel_2);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
+		JLabel lblNewLabel_img = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/user.png")).getImage();
-		lblNewLabel_1.setIcon(new ImageIcon(img));
-		lblNewLabel_1.setBounds(681, 10, 100, 70);
-		contentPane.add(lblNewLabel_1);
+		lblNewLabel_img.setIcon(new ImageIcon(img));
+		lblNewLabel_img.setBounds(681, 10, 100, 70);
+		contentPane.add(lblNewLabel_img);
 	}
 }

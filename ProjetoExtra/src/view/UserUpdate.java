@@ -17,35 +17,18 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class UserUpdate extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1_cargo;
+	private JTextField textField_NameUser;
+	private JTextField textField_cargo;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UserAdd frame = new UserAdd();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public UserUpdate() {
 		setTitle("Gerenciador Comercial");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,19 +49,19 @@ public class UserUpdate extends JFrame {
 		lblNewLabel_1.setBounds(97, 94, 174, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField((String) UserClass.getName());
-		textField.setBounds(97, 106, 338, 31);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_NameUser = new JTextField((String) UserClass.getName1());
+		textField_NameUser.setBounds(97, 106, 338, 31);
+		contentPane.add(textField_NameUser);
+		textField_NameUser.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cargo");
 		lblNewLabel_2.setBounds(97, 147, 70, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		textField_1_cargo = new JTextField((String) UserClass.getCargo());
-		textField_1_cargo.setBounds(97, 159, 338, 31);
-		contentPane.add(textField_1_cargo);
-		textField_1_cargo.setColumns(10);
+		textField_cargo = new JTextField((String) UserClass.getCargo());
+		textField_cargo.setBounds(97, 159, 338, 31);
+		contentPane.add(textField_cargo);
+		textField_cargo.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Senha");
 		lblNewLabel_3.setBounds(97, 200, 45, 13);
@@ -100,13 +83,17 @@ public class UserUpdate extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("") || textField_1_cargo.getText().equals("") || passwordField.getText().equals("")) {
+				if(textField_NameUser.getText().equals("") || textField_cargo.getText().equals("") || passwordField.getText().equals("")) {
 					
 					JOptionPane.showMessageDialog(null, "Informações incompletas!");;
 					
 				}else {
 				
-				UserClass.UpdateUser(textField.getText(), passwordField.getText(), textField_1_cargo.getText(), lblNewLabel_IdUser.getText());		
+				try {
+					UserClass.UpdateUser(textField_NameUser.getText(), passwordField.getText(), textField_cargo.getText(), lblNewLabel_IdUser.getText());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}		
 				UserUpdate.this.dispose();
 			}
 		}});
