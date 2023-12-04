@@ -105,7 +105,11 @@ public class UpdateParts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de salvar.");
 				}else {
 				
-				Parts.updateParts1(lblNewLabel_5.getText(), textField_pName.getText(), textArea_description.getText(), textField_amount.getText(), textField_price.getText());
+				try {
+					Parts.updateParts1(lblNewLabel_5.getText(), textField_pName.getText(), textArea_description.getText(), textField_amount.getText(), textField_price.getText());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 			
 			}}

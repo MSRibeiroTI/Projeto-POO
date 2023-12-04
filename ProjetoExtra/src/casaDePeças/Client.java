@@ -1,5 +1,6 @@
 package casaDePeças;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class Client extends Base{
 		this.email = email;
 	}
 	
-	public static void consultClient(String id) {
+	public static void consultClient(String id) throws IOException {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {

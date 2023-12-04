@@ -2,9 +2,12 @@ package casaDePeças;
 
 import java.util.Scanner;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import com.mysql.cj.protocol.a.authentication.Sha256PasswordPlugin;
 
@@ -13,7 +16,12 @@ import view.Login;
 
 import java.awt.Choice;
 import java.awt.Desktop.Action;
+import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 
 public class casaDePeças {
@@ -24,7 +32,7 @@ public class casaDePeças {
 	ResultSet rs= null;
 	private static String searche;
 	
-	public static void consult() {
+	public static void consult() throws IOException {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
@@ -41,11 +49,12 @@ public class casaDePeças {
 				}
 				r.close();
 			} catch (Exception e) {
-				System.out.println(e);				
+				System.out.println(e);
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			}
 	}
 	
-	public static void consultUser() {
+	public static void consultUser() throws IOException {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
@@ -62,12 +71,13 @@ public class casaDePeças {
 				}
 				r.close();
 			} catch (Exception e) {
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 				System.out.println(e);				
 			}
 	}
 	
 	
-	public static void search(String search) {
+	public static void search(String search) throws IOException {
 		searche = search;
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
@@ -85,11 +95,12 @@ public class casaDePeças {
 				}
 				r.close();
 			} catch (Exception e) {
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 				System.out.println(e);				
 			}
 	}
 	
-	public static void searchParts(String searchP) {
+	public static void searchParts(String searchP) throws IOException {
 		searche = searchP;
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
@@ -107,6 +118,7 @@ public class casaDePeças {
 				}
 				r.close();
 			} catch (Exception e) {
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 				System.out.println(e);				
 			}
 	}
@@ -171,8 +183,10 @@ public class casaDePeças {
 //			System.out.println(e);
 //		}
 //	}
-	
+
+        
 	public static void validCPF() {
+		
 		CPF = JOptionPane.showInputDialog("Digite um CPF válido, só os números:");
 	   	if (ValidateCPF.isCPF(CPF) == true) {
 	   		new view.ClientAdd().setVisible(true);
@@ -181,7 +195,7 @@ public class casaDePeças {
 		}
 	
 	//Função para rodar no JFrame.
-	public static void addUser1(String name, String address, String city, String phone, String email) {
+	public static void addUser1(String name, String address, String city, String phone, String email) throws IOException {
 		try {
 		String add = "INSERT into cliente ("+"Nname,"+"CPF,"+"Address,"+"City,"+"Phone,"+"Email)"+"values ("+"?,"+"?,"+"?,"+"?,"+"?,"+"?);";
 		
@@ -198,6 +212,7 @@ public class casaDePeças {
 		JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!");
 		ps.close();
 		}catch(Exception e) {
+			LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			JOptionPane.showMessageDialog(null, "CPF já cadastrado!");
 			System.out.println(e);
 		}
@@ -222,13 +237,14 @@ public class casaDePeças {
 	}
 	
 		
-	public static void login(String nome, String pass) {
+	public static void login(String nome, int i) throws IOException {
+		System.out.println(i);
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
 				s = (Statement) conexao.createStatement();
 				ResultSet r = null;
-				r = s.executeQuery("Select nome, pass from usuario where nome = '"+nome+"' AND pass = '"+pass+"'");
+				r = s.executeQuery("Select nome, pass from usuario where nome = '"+nome+"' AND pass = '"+i+"'");
 				
 				if(r.next()) {
 					new view.TelaPrincipal().setVisible(true);

@@ -1,9 +1,13 @@
 package casaDePeças;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
@@ -42,7 +46,7 @@ public class Parts extends Base{
 		this.amount = storage;
 	}
 	
-	public static void addParts(String name, String description, String amount, String price) {
+	public static void addParts(String name, String description, String amount, String price) throws IOException {
 		try {
 		String add = "INSERT into parts ("+"Nname,"+"description,"+"amount,"+"price )"+"values ("+"?,"+"?,"+"?,"+"?);";
 		
@@ -57,11 +61,12 @@ public class Parts extends Base{
 		JOptionPane.showMessageDialog(null, "Dados Salvos com Sucesso!");
 		ps.close();
 		}catch(Exception e) {
+			LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			System.out.println(e);
 		}
 	}
 	
-	public static void consultParts() {
+	public static void consultParts() throws IOException {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
@@ -78,11 +83,12 @@ public class Parts extends Base{
 				}
 				r.close();
 			} catch (Exception e) {
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 				System.out.println(e);				
 			}
 	}
 	
-	public static void updateParts(String id) {
+	public static void updateParts(String id) throws IOException {
 		Statement s = null;
 		Connection conexao = ConnectDataBase.conect();
 			try {
@@ -102,17 +108,19 @@ public class Parts extends Base{
 						setQuant(modelo.getDataVector().elementAt(0).elementAt(3));
 						setPrice(modelo.getDataVector().elementAt(0).elementAt(4));
 					} catch (Exception e) {
+						LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 						System.out.println(e);
 					}
 					new view.UpdateParts().setVisible(true);
 				}
 				r.close();
 			} catch (Exception e) {
+				LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 				System.out.println(e);				
 			}
 	}
 	
-	public static void updateParts1(String id, String name, String description, String amount, String price) {
+	public static void updateParts1(String id, String name, String description, String amount, String price) throws IOException {
 		try {
 		String add = "UPDATE parts SET Nname = ?, Description = ?, Amount = ?, price = ? WHERE partsID = "+id+";";
 		
@@ -127,6 +135,7 @@ public class Parts extends Base{
 		JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!");
 		ps.close();
 		}catch(Exception e) {
+			LogGenerator.generateLog(e.getMessage()+LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			System.out.println(e);
 		}
 	}

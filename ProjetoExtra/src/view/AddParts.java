@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JSlider;
@@ -96,7 +97,12 @@ public class AddParts extends JFrame {
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de salvar.");
 				}else {
 				
-				Parts.addParts(textField_name.getText(), editorPane_Description.getText(), textField_Amount.getText(), textField_Price.getText());
+				try {
+					Parts.addParts(textField_name.getText(), editorPane_Description.getText(), textField_Amount.getText(), textField_Price.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();
 			}}
 		});

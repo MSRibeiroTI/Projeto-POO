@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -84,7 +85,12 @@ public class PartsView extends JFrame {
 		JButton btnNewButton_listAll = new JButton("Listar Todos");
 		btnNewButton_listAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Parts.consultParts();
+				try {
+					Parts.consultParts();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_listAll.setBounds(201, 384, 173, 50);
@@ -115,7 +121,12 @@ public class PartsView extends JFrame {
 					JOptionPane.showMessageDialog(null, "Digite algum nome na busca!");;
 					
 				}else {
-				casaDePeças.searchParts(textFieldbusca.getText());
+				try {
+					casaDePeças.searchParts(textFieldbusca.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}}
 		});
 		btnNewButton_search.setBounds(487, 68, 122, 29);
@@ -139,7 +150,12 @@ public class PartsView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				String IDUpdate = JOptionPane.showInputDialog("Qual o ID do Produto?");
-				Parts.updateParts(IDUpdate);
+				try {
+					Parts.updateParts(IDUpdate);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_update.setBounds(384, 384, 173, 50);

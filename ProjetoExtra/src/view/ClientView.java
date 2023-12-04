@@ -22,6 +22,7 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JDesktopPane;
@@ -35,25 +36,6 @@ public class ClientView extends JFrame {
 	public static JTable ClientsTb;
 	private JTextField textFieldbusca;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ClientView frame = new ClientView();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ClientView() {
 		setResizable(false);
 		setTitle("Gerenciador Comercial");
@@ -106,7 +88,12 @@ public class ClientView extends JFrame {
 		JButton btnNewButton_Listar = new JButton("Listar Todos");
 		btnNewButton_Listar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				casaDePeças.consult();
+				try {
+					casaDePeças.consult();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_Listar.setBounds(201, 384, 173, 50);
@@ -137,7 +124,12 @@ public class ClientView extends JFrame {
 					JOptionPane.showMessageDialog(null, "Digite algum nome na busca!");;
 					
 				}else {
-				casaDePeças.search(textFieldbusca.getText());
+				try {
+					casaDePeças.search(textFieldbusca.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}}
 		});
 		btnNewButton_Buscar.setBounds(487, 68, 122, 29);
@@ -165,7 +157,12 @@ public class ClientView extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String IDUpdate = JOptionPane.showInputDialog("Qual o ID do cliente?");
-				Client.consultClient(IDUpdate);
+				try {
+					Client.consultClient(IDUpdate);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_4.setBounds(384, 384, 173, 50);

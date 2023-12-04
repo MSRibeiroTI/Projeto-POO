@@ -37,7 +37,7 @@ public class UserClass extends Base {
 		Connection conexao = ConnectDataBase.conect();
 		PreparedStatement ps = conexao.prepareStatement(add);
 		ps.setString(1, name.toUpperCase());
-		ps.setString(2, pass);
+		ps.setLong(2, pass.hashCode());
 		ps.setString(3, cargo.toUpperCase());
 		ps.executeUpdate();
 		

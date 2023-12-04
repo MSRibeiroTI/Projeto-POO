@@ -23,6 +23,7 @@ import java.awt.Choice;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -112,7 +113,12 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, "Informações incompletas!");;
 				}else {
 				
-				casaDePeças.login(textField.getText(), passwordField.getText());;
+				try {
+					casaDePeças.login(textField.getText(), passwordField.getText().hashCode());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();}}
 		});
 		btnNewButton.setBounds(172, 208, 85, 25);

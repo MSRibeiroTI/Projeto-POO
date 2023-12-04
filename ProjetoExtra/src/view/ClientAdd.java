@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ClientAdd extends JFrame {
 
@@ -92,7 +93,12 @@ public class ClientAdd extends JFrame {
 					
 				}else {
 				
-				casaDePeças.addUser1(textField_name.getText(), textField_address.getText(), textField_city.getText(), textField_phone.getText(), textField_email.getText());		
+				try {
+					casaDePeças.addUser1(textField_name.getText(), textField_address.getText(), textField_city.getText(), textField_phone.getText(), textField_email.getText());
+				} catch (IOException e1) {
+
+					e1.printStackTrace();
+				}		
 				ClientAdd.this.dispose();		}
 		}});
 			
