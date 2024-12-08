@@ -9,36 +9,49 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class LogGenerator {
-	
-public static void generateLog(String message) throws IOException {
-		
-		Path path = Paths.get("C:/logs/");
-		
-		if(!Files.exists(path)) {
-			
-			Files.createDirectory(path);
-			
-		}
-		
-		File log = new File("C:/logs/logs.txt");
-		
-		if(!log.exists()) {
-			
-			log.createNewFile();
-		
-		}
-		
-		FileWriter fw = new FileWriter(log, true);
-		BufferedWriter bw = new BufferedWriter(fw);
-		
-		bw.write(message);
-		bw.newLine();
+    private static LogGenerator instance; // Instância única
 
-		bw.close();
-		fw.close();
-		
-	}
+    private LogGenerator() {
+        // Construtor privado para evitar instanciar externamente
+    }
+
+    public static LogGenerator getInstance() {
+        if (instance == null) {
+            instance = new LogGenerator();
+        }
+        return instance;
+        // Verifica se a instância existe, se for nula, cria uma instância  
+    }
+
+    // Método para gerar o log
+    public static void generateLog(String message) throws IOException {
+        Path path = Paths.get("C:/logs/");
+
+        if (!Files.exists(path)) {
+            Files.createDirectory(path); //cria a pasta para armazenar o log
+        }
+
+        File log = new File("C:/logs/logs.txt");
+
+        if (!log.exists()) {
+            log.createNewFile();  //cria o arquivo para armazenar as mensagens log
+        }
+
+        FileWriter fw = new FileWriter(log, true);  //
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        bw.write(message);
+        bw.newLine();
+
+        bw.close();
+        fw.close();
+    }
 }
-	
+
+
+
+
+
+
 
 
